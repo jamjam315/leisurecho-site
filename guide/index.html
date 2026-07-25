@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>使い方 | レジャー帳</title>
+<meta name="description" content="レジャー帳の使い方。記録・カレンダー・レポートの基本から、スクショ取込・パチの記録・バックアップまで画面つきで説明します。">
+<style>
+  :root {
+    --green: #4C9A72;
+    --green-dark: #04342C;
+    --text: #22302B;
+    --text-sub: #5B6B64;
+    --bg: #FAFCFB;
+    --card: #FFFFFF;
+    --line: #E2EAE6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.9;
+    font-size: 16px;
+  }
+  /* 本文の横にスクリーンショットを置くため、privacy/より少しだけ広い
+     コンテナにする。配色・字送り・見出しの様式は共通のまま。 */
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 20px 80px;
+  }
+  header { margin-bottom: 40px; }
+  .app-name {
+    font-size: 14px;
+    color: var(--green);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-top: 6px;
+  }
+  .lead {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--green);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 40px;
+    font-size: 15px;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin: 40px 0 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin: 28px 0 10px;
+  }
+  p { margin-bottom: 14px; }
+  ul { margin: 0 0 14px 1.4em; }
+  li { margin-bottom: 6px; }
+
+  /* 本文＋スクリーンショットの2カラム。画像は本文の後ろに置いてあるので、
+     スマホ（縦積み）では自動的に本文の下に来る。 */
+  .shot-row {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .shot-row > .body { flex: 1 1 auto; min-width: 0; }
+  .shot-row > .body > *:last-child { margin-bottom: 0; }
+  .shot { flex: 0 0 auto; width: 309px; max-width: 100%; }
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+  }
+  .shot figcaption {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-sub);
+    text-align: center;
+  }
+  @media (max-width: 700px) {
+    .shot-row { flex-direction: column; gap: 16px; }
+    .shot { width: 100%; max-width: 320px; margin: 0 auto; }
+  }
+
+  details {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0 18px;
+    margin-bottom: 12px;
+  }
+  details[open] { padding-bottom: 18px; }
+  summary {
+    cursor: pointer;
+    padding: 14px 0;
+    font-weight: 700;
+    color: var(--green-dark);
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: "＋";
+    color: var(--green);
+    font-weight: 700;
+    margin-right: 8px;
+  }
+  details[open] summary::before { content: "－"; }
+  summary:hover { color: var(--green); }
+
+  .faq { margin-bottom: 20px; }
+  .faq .q {
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 4px;
+  }
+  .faq p { margin-bottom: 0; }
+
+  .note {
+    font-size: 14px;
+    color: var(--text-sub);
+    background: #F2F7F4;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 14px 0;
+  }
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--text-sub);
+  }
+  .back { margin-top: 18px; font-size: 14px; }
+  .back a { margin-right: 16px; }
+  a { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="app-name">レジャー帳</div>
+  <h1>レジャー帳の使い方</h1>
+</header>
+
+<div class="lead">
+  レジャー帳は、競艇・競馬・競輪・パチンコの収支を記録するアプリです。記録・集計・書き出しは、すべて無料で使えます。
+</div>
+
+<h2>はじめかた（3ステップ）</h2>
+
+<h3>1. 記録する</h3>
+<div class="shot-row">
+  <div class="body">
+    <p>画面下の「公営入力」から、競技・場・レース番号・券種・金額を入れて保存します。買い目の入力は任意です。パチンコ・スロットは「パチ入力」から。</p>
+    <p>中央競馬・地方競馬の投票結果は、スクショ取込でまとめて登録できます（後述）。</p>
+  </div>
+  <figure class="shot">
+    <img src="../images/input-public.jpg" alt="公営入力画面。競技・場・レース番号・券種・購入額の入力欄が並んでいる" width="309" height="720" loading="lazy">
+    <figcaption>公営入力</figcaption>
+  </figure>
+</div>
+
+<h3>2. カレンダーで見る</h3>
+<div class="shot-row">
+  <div class="body">
+    <p>記録した日は、プラスの日が緑・マイナスの日が赤で色づきます。月の収支と「打った日」の日数がひと目でわかります。</p>
+    <p>日付をタップすると、その日の記録一覧が開きます。</p>
+  </div>
+  <figure class="shot">
+    <img src="../images/calendar.jpg" alt="カレンダー画面。月の収支と打った日数が上部に表示され、各日がプラスは緑・マイナスは赤で色分けされている" width="309" height="720" loading="lazy">
+    <figcaption>カレンダー</figcaption>
+  </figure>
+</div>
+
+<h3>3. レポートで振り返る</h3>
+<div class="shot-row">
+  <div class="body">
+    <p>累積収支の推移と月別の収支をグラフで確認できます。</p>
+    <p>公営・パチ・簡易・すべて、のタブで対象を切り替えられます。</p>
+  </div>
+  <figure class="shot">
+    <img src="../images/report.jpg" alt="レポート画面。累積収支の折れ線グラフと月別収支の棒グラフが表示されている" width="309" height="720" loading="lazy">
+    <figcaption>レポート</figcaption>
+  </figure>
+</div>
+
+<h2>画面ごとの使い方</h2>
+
+<details>
+  <summary>スクショから取り込む（中央・地方競馬）</summary>
+  <div class="shot-row">
+    <div class="body">
+      <p>IPAT（JRA／NAR）の「照会結果一覧」画面のスクリーンショットを選ぶと、内容を自動で読み取ります。複数枚まとめて選べます。</p>
+      <p>画像は端末の中だけで処理され、外部には送信されません。</p>
+    </div>
+    <figure class="shot">
+      <img src="../images/ocr-import.jpg" alt="スクショ取込の入口画面。取り込む画像を選ぶ案内が表示されている" width="309" height="720" loading="lazy">
+      <figcaption>スクショから取込</figcaption>
+    </figure>
+  </div>
+  <div class="shot-row">
+    <div class="body">
+      <p>読み取り結果は保存前に必ず確認画面が出ます。日付など推定した項目は赤字で注意が表示されるので、確認・修正してから保存してください。</p>
+      <p>チェックを入れた記録だけが保存されます。</p>
+    </div>
+    <figure class="shot">
+      <img src="../images/ocr-confirm.jpg" alt="取込内容の確認画面。推定した日付に赤字で確認をうながす注意書きが表示されている" width="309" height="720" loading="lazy">
+      <figcaption>取込内容の確認</figcaption>
+    </figure>
+  </div>
+</details>
+
+<details>
+  <summary>パチンコ・スロットを記録する</summary>
+  <div class="shot-row">
+    <div class="body">
+      <p>日付・種別（パチンコ／スロット）・店を選び、現金の投資と回収を入れて保存します。貯玉・貯メダルを使った分も記録でき、店ごとの残高と交換率を管理できます。</p>
+      <p>レートが違う場合は店を分けて登録してください（例：〇〇店 10スロ／〇〇店 20スロ）。</p>
+      <p>「詳細を追加」から時刻・機種・写真なども残せます。</p>
+    </div>
+    <figure class="shot">
+      <img src="../images/input-pachi.jpg" alt="パチ入力画面。種別と店を選び、現金の投資と回収を入力する欄が並んでいる" width="309" height="720" loading="lazy">
+      <figcaption>パチ入力</figcaption>
+    </figure>
+  </div>
+</details>
+
+<details>
+  <summary>機種を選ぶ</summary>
+  <div class="shot-row">
+    <div class="body">
+      <p>機種名の入力欄をタップすると、機種を検索して選べます。</p>
+      <p>ひらがな・カタカナ・略称（例:「沖海」）でも検索できます。</p>
+      <p>一覧に無い機種は、そのまま自由に入力してもかまいません。</p>
+    </div>
+    <figure class="shot">
+      <img src="../images/machine-picker.jpg" alt="機種を選ぶ画面。「沖海」で検索し、海物語シリーズの機種が確率つきで一覧表示されている" width="309" height="720" loading="lazy">
+      <figcaption>機種ピッカー</figcaption>
+    </figure>
+  </div>
+</details>
+
+<details>
+  <summary>記録を探す・絞り込む</summary>
+  <div class="shot-row">
+    <div class="body">
+      <p>記録タブでは、公営・パチ・簡易を切り替えて一覧できます。</p>
+      <p>競技や券種のチップをタップすると絞り込みができ、件数・収支合計・回収率・的中率が上部にまとまって表示されます。</p>
+    </div>
+    <figure class="shot">
+      <img src="../images/records-public.jpg" alt="記録タブの公営一覧。上部に件数・収支合計・回収率・的中率、下に各記録の収支と結果が並んでいる" width="309" height="720" loading="lazy">
+      <figcaption>記録・公営</figcaption>
+    </figure>
+  </div>
+  <div class="shot-row">
+    <div class="body">
+      <p>パチの一覧では、平均時給と勝ち日率も確認できます。</p>
+    </div>
+    <figure class="shot">
+      <img src="../images/records-pachi.jpg" alt="記録タブのパチ一覧。平均時給と勝ち日率が上部に表示されている" width="309" height="720" loading="lazy">
+      <figcaption>記録・パチ</figcaption>
+    </figure>
+  </div>
+</details>
+
+<details>
+  <summary>その日の記録を見る</summary>
+  <div class="shot-row">
+    <div class="body">
+      <p>カレンダーの日付をタップすると、その日の記録が一覧で開きます。</p>
+      <p>それぞれの収支と結果（的中・ハズレなど）が確認でき、この画面からも公営入力・パチ入力・簡易入力を追加できます。</p>
+    </div>
+    <figure class="shot">
+      <img src="../images/day-detail.jpg" alt="日詳細画面。その日の記録が収支と結果つきで並び、下部に入力ボタンが表示されている" width="309" height="720" loading="lazy">
+      <figcaption>日詳細</figcaption>
+    </figure>
+  </div>
+</details>
+
+<details>
+  <summary>バックアップと書き出し</summary>
+  <div class="shot-row">
+    <div class="body">
+      <p>設定の「データのエクスポート」から、いつでも無料で全件書き出せます。</p>
+      <ul>
+        <li>CSVでエクスポート: 表計算ソフトなどで使える形式です</li>
+        <li>バックアップを書き出す（JSON）: 復元に必要な全データを1ファイルに保存します</li>
+        <li>バックアップから復元（JSON）: 現在の記録をバックアップの内容で置き換えます</li>
+      </ul>
+      <div class="note">※写真ファイル自体はバックアップに含まれません。</div>
+      <p>機種変更のときは、バックアップJSONを新しい端末に移して復元してください。</p>
+    </div>
+    <figure class="shot">
+      <img src="../images/settings-1.jpg" alt="設定画面の上部。データのエクスポート（CSV・JSONバックアップ・復元）の項目が並んでいる" width="309" height="720" loading="lazy">
+      <figcaption>設定・データのエクスポート</figcaption>
+    </figure>
+  </div>
+</details>
+
+<details>
+  <summary>通知と表示のカスタマイズ</summary>
+  <div class="shot-row">
+    <div class="body">
+      <ul>
+        <li>開催日夜のスクショリマインド: IPAT照会は当日・前日分しか見られないため、開催日（土・日）の夜20時に記録を促す通知を送れます（オン／オフ可）</li>
+        <li>バーの入替: カレンダー下の入力ボタンの並びを入れ替えられます</li>
+        <li>店と貯玉の管理: 店ごとの貯玉残高・交換率の確認や修正ができます</li>
+      </ul>
+    </div>
+    <figure class="shot">
+      <img src="../images/settings-2.jpg" alt="設定画面の下部。スクショリマインドの通知設定、バーの入替、店と貯玉の管理の項目が並んでいる" width="309" height="720" loading="lazy">
+      <figcaption>設定・通知とカスタマイズ</figcaption>
+    </figure>
+  </div>
+</details>
+
+<h2>よくある質問</h2>
+
+<div class="faq">
+  <div class="q">Q. データはどこに保存されますか？</div>
+  <p>A. すべて端末の中に保存されます。記録データが外部に送信されることはありません。</p>
+</div>
+
+<div class="faq">
+  <div class="q">Q. 会員登録は必要ですか？</div>
+  <p>A. 不要です。インストールしてすぐ使えます。</p>
+</div>
+
+<div class="faq">
+  <div class="q">Q. 無料で使える範囲は？</div>
+  <p>A. 記録・集計・書き出しは、すべて無料です。</p>
+</div>
+
+<div class="faq">
+  <div class="q">Q. スクショ取込はどの画面に対応していますか？</div>
+  <p>A. IPAT（JRA／NAR）の「照会結果一覧」画面に対応しています。読み取りは端末内で行われ、画像が外部に送信されることはありません。</p>
+</div>
+
+<div class="faq">
+  <div class="q">Q. 機種ピッカーに目当ての機種がありません</div>
+  <p>A. 自由入力でそのまま記録できます。機種データは今後の更新で追加していきます。</p>
+</div>
+
+<div class="faq">
+  <div class="q">Q. 機種変更するときはどうすればいいですか？</div>
+  <p>A. 設定からバックアップ（JSON）を書き出し、新しい端末で復元してください。写真ファイルは移行されません（記録との紐づけ情報のみ保存されます）。</p>
+</div>
+
+<div class="faq">
+  <div class="q">Q. 予想は教えてくれますか？</div>
+  <p>A. レジャー帳は記録・分析ツールです。買い目の予想・推奨や購入代行は行いません。20歳以上の方を対象としています。</p>
+</div>
+
+<div class="faq">
+  <div class="q">Q. 問い合わせ先は？</div>
+  <p>A. <a href="mailto:info@leisurecho.com">info@leisurecho.com</a> までご連絡ください。</p>
+</div>
+
+<footer>
+  MTP Works<br>
+  お問い合わせ：info@leisurecho.com
+  <div class="back">
+    <a href="../">← レジャー帳トップへ</a>
+    <a href="../privacy/">プライバシーポリシー</a>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

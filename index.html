@@ -55,6 +55,12 @@
     border-top: 1px solid var(--line);
     font-size: 14px;
   }
+  /* リンクが増えても狭い画面で詰まって見えないよう、間隔を空けて
+     折り返しも許す。 */
+  .links a {
+    display: inline-block;
+    margin: 0 10px;
+  }
   a { color: var(--green); }
   footer {
     margin-top: 28px;
@@ -69,7 +75,8 @@
     <div class="tagline">競艇・競馬・競輪の収支を、かんたんに記録。</div>
     <div class="status">Google Play にて近日公開予定</div>
     <div class="links">
-      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="guide/">使い方</a>
+      <a href="privacy/">プライバシーポリシー</a>
     </div>
     <footer>MTP Works — info@leisurecho.com</footer>
   </div>

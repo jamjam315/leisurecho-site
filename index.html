@@ -49,6 +49,29 @@
     color: var(--green);
     background: #fff;
   }
+  /* ストアのリンク。丸い枠で、押せることが分かる見た目にする。 */
+  .stores {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .stores a {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 1px solid var(--green);
+    border-radius: 999px;
+    font-size: 14px;
+    text-decoration: none;
+    background: #fff;
+  }
+  /* 姉妹アプリの案内。主役(レジャー帳)より控えめに。 */
+  .sister {
+    margin-top: 28px;
+    font-size: 13px;
+    color: var(--text-sub);
+  }
   .links {
     margin-top: 36px;
     padding-top: 20px;
@@ -73,7 +96,17 @@
   <div class="card">
     <div class="logo">レジャー帳</div>
     <div class="tagline">競艇・競馬・競輪の収支を、かんたんに記録。</div>
-    <div class="status">Google Play にて近日公開予定</div>
+    <div class="status">App Store・Google Play で公開中</div>
+    <div class="stores">
+      <a href="https://apps.apple.com/jp/app/id6804672981">App Store（iPhone）</a>
+      <a href="https://play.google.com/store/apps/details?id=com.leisurecho.app">Google Play（Android）</a>
+    </div>
+    <div class="sister">
+      姉妹アプリ「艇読み」（ボートレースの公式データを読む・無料）<br>
+      <a href="https://apps.apple.com/jp/app/id6810243272">App Store</a>
+      ／
+      <a href="https://play.google.com/store/apps/details?id=com.mtpworks.teiyomi">Google Play</a>
+    </div>
     <div class="links">
       <a href="guide/">使い方</a>
       <a href="privacy/">プライバシーポリシー</a>
